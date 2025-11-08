@@ -4,16 +4,13 @@ import 'package:get/get.dart';
 import '../index.dart';
 
 /// hello
-class HelloWidget extends GetView<WelcomeController> {
+class HelloWidget extends GetView<MainController> {
   const HelloWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ElevatedButton(
-        onPressed: () => Get.toNamed('/application'),
-        child: Text('下一步'),
-      ),
+      child: Obx(() => Text(controller.state.title)),
     );
   }
 }

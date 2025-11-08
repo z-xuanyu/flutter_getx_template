@@ -11,6 +11,11 @@ class RoutePages {
   // 列表
   static List<GetPage> list = [
     GetPage(name: RouteNames.inital, page: () => const WelcomePage()),
+    GetPage(
+      name: RouteNames.application,
+      page: () => const ApplicationPage(),
+      binding: ApplicationBinding(),
+    ),
     GetPage(name: RouteNames.signIn, page: () => const SignInPage()),
   ];
 }
