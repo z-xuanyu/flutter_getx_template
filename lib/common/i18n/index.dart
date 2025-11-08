@@ -1,3 +1,3 @@
-library i18n;
+library;
 
 // export './xxxx.dart';

@@ -80,7 +80,7 @@ class HttpUtil {
           // 如果你想终止请求并触发一个错误,你可以 reject 一个`DioError`对象,如`handler.reject(error)`，
           // 这样请求将被中止并触发异常，上层catchError会被调用。
         },
-        onError: (DioError e, handler) {
+        onError: (DioException e, handler) {
           // Do something with response error
           Loading.dismiss();
           ErrorEntity eInfo = createErrorEntity(e);
@@ -206,7 +206,7 @@ class HttpUtil {
     bool cacheDisk = false,
   }) async {
     Options requestOptions = options ?? Options();
-    requestOptions.extra ??= Map();
+    requestOptions.extra ??= <String, dynamic>{};
     requestOptions.extra!.addAll({
       "refresh": refresh,
       "noCache": noCache,
@@ -378,6 +378,7 @@ class ErrorEntity implements Exception {
   String message = "";
   ErrorEntity({required this.code, required this.message});
 
+  @override
   String toString() {
     if (message == "") return "Exception";
     return "Exception: code $code, $message";

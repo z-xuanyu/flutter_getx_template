@@ -1,3 +1,3 @@
-library components;
+library;
 
 // export './xxxx.dart';

@@ -1,3 +1,3 @@
-library extension;
+library;
 
 // export './xxxx.dart';

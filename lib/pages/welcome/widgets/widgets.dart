@@ -1,3 +1,3 @@
-library widgets;
+library;
 
 export './hello.dart';

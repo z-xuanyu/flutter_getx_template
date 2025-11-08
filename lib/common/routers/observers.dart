@@ -13,8 +13,8 @@ class RouteObservers<R extends Route<dynamic>> extends RouteObserver<R> {
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPop(route, previousRoute);
     RoutePages.history.remove(route.settings.name);
-    print('didPop');
-    print(RoutePages.history);
+    debugPrint('didPop');
+    debugPrint('${RoutePages.history}');
   }
 
   @override
@@ -33,19 +33,20 @@ class RouteObservers<R extends Route<dynamic>> extends RouteObserver<R> {
         }
       }
     }
-    print('didReplace');
-    print(RoutePages.history);
+    debugPrint('didReplace');
+    debugPrint('${RoutePages.history}');
   }
 
   @override
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didRemove(route, previousRoute);
     RoutePages.history.remove(route.settings.name);
-    print('didRemove');
-    print(RoutePages.history);
+    debugPrint('didRemove');
+    debugPrint('${RoutePages.history}');
   }
 
   @override
+  // ignore: unnecessary_overrides
   void didStartUserGesture(
     Route<dynamic> route,
     Route<dynamic>? previousRoute,
@@ -54,6 +55,7 @@ class RouteObservers<R extends Route<dynamic>> extends RouteObserver<R> {
   }
 
   @override
+  // ignore: unnecessary_overrides
   void didStopUserGesture() {
     super.didStopUserGesture();
   }

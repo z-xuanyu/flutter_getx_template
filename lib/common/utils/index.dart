@@ -1,4 +1,4 @@
-library utils;
+library;
 
 export "loading.dart";
 export 'logger.dart';
