@@ -1,23 +1,18 @@
 import 'package:get/get.dart';
 
-import '../../common/routers/names.dart';
-import '../../common/store/config.dart';
 import 'index.dart';
 
-class WelcomeController extends GetxController {
-  WelcomeController();
+class SignUpController extends GetxController {
+  SignUpController();
 
-  final state = WelcomeState();
+  final state = SignUpState();
 
   // tap
   void handleTap(int index) {
-    Get.snackbar("标题", "消息");
-  }
-
-  // 跳转 注册界面
-  handleNavSignIn() async {
-    await ConfigStore.to.saveAlreadyOpen();
-    Get.offAndToNamed(RouteNames.signIn);
+    Get.snackbar(
+      "标题",
+      "消息",
+    );
   }
 
   /// 在 widget 内存中分配后立即调用。

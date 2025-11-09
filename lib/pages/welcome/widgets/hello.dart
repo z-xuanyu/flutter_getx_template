@@ -11,7 +11,7 @@ class HelloWidget extends GetView<WelcomeController> {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () => Get.toNamed('/application'),
+        onPressed: () => controller.handleNavSignIn(),
         child: Text('下一步'),
       ),
     );

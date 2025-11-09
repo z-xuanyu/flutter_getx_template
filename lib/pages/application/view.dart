@@ -23,7 +23,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         ),
       ),
       actions: [
-        IconButton(icon: Icon(Icons.search), onPressed: () => Get.toNamed('/')),
+        IconButton(icon: Icon(Icons.search), onPressed: () => debugPrint('搜索')),
       ],
     );
   }
