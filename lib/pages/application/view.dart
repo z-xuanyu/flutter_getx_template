@@ -57,7 +57,6 @@ class ApplicationPage extends GetView<ApplicationController> {
     return GetBuilder<ApplicationController>(
       builder: (_) {
         return Scaffold(
-          appBar: _buildAppBar(),
           body: _buildPageView(),
           bottomNavigationBar: _buildBottomNavigationBar(),
         );
