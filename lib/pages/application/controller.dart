@@ -7,8 +7,6 @@ class ApplicationController extends GetxController {
   ApplicationController();
 
   final state = ApplicationState();
-  // tab 页标题
-  late final List<String> tabTitles;
   // 页控制器
   late final PageController pageController;
   // 底部导航项目
@@ -37,11 +35,10 @@ class ApplicationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-    tabTitles = ['首页', '关于'];
     bottomTabs = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
       const BottomNavigationBarItem(icon: Icon(Icons.info), label: '关于'),
+      const BottomNavigationBarItem(icon: Icon(Icons.person_2), label: '我的'),
     ];
     pageController = PageController(initialPage: state.tabIndex);
   }

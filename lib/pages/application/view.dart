@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../about/view.dart';
 import '../main/view.dart';
+import '../my/view.dart';
 import 'index.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
@@ -16,7 +17,7 @@ class ApplicationPage extends GetView<ApplicationController> {
       physics: NeverScrollableScrollPhysics(),
       controller: controller.pageController,
       onPageChanged: controller.handlePageChanged,
-      children: <Widget>[MainPage(), AboutPage()],
+      children: <Widget>[MainPage(), AboutPage(), MyPage()],
     );
   }
 
