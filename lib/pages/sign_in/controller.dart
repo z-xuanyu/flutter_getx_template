@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../common/models/user.dart';
+import '../../common/api/user.dart';
+import '../../common/models/index.dart';
 import '../../common/routers/names.dart';
 import '../../common/store/user.dart';
 import 'index.dart';
@@ -12,7 +13,7 @@ class SignInController extends GetxController {
   final state = SignInState();
 
   // email的控制器
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phpneController = TextEditingController();
   // 密码的控制器
   final TextEditingController passController = TextEditingController();
 
@@ -27,8 +28,19 @@ class SignInController extends GetxController {
   }
 
   // 登录
-  handleSignIn() {
-    UserStore.to.saveProfile(UserLoginResponseEntity());
+  handleSignIn() async {
+    final UserLoginResponseEntity info = await UserAPI.login(
+      params: UserLoginRequestEntity(
+        phone: phpneController.text,
+        password: passController.text,
+      ),
+    );
+    UserStore.to.saveProfile(
+      UserLoginResponseEntity(
+        accessToken: info.accessToken,
+        refreshToken: info.accessToken,
+      ),
+    );
     Get.offAndToNamed(RouteNames.application);
   }
 

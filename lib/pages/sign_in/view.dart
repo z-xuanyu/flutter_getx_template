@@ -107,8 +107,8 @@ class SignInPage extends GetView<SignInController> {
         children: [
           /// 邮箱输入框
           _buildInputField(
-            controller: controller.emailController,
-            label: "Email Address",
+            controller: controller.phpneController,
+            label: "Phone",
             hintText: "name@example.com",
             icon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
@@ -160,6 +160,7 @@ class SignInPage extends GetView<SignInController> {
                 ),
               ),
               SizedBox(width: 12.w),
+
               /// 登录按钮
               Expanded(
                 child: _buildButton(
@@ -268,9 +269,7 @@ class SignInPage extends GetView<SignInController> {
                       end: Alignment.bottomRight,
                     )
                   : null,
-              color: !isPrimary
-                  ? const Color(0xFFF0F0F0)
-                  : null,
+              color: !isPrimary ? const Color(0xFFF0F0F0) : null,
               borderRadius: BorderRadius.circular(10.w),
               border: !isPrimary
                   ? Border.all(
@@ -285,9 +284,7 @@ class SignInPage extends GetView<SignInController> {
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
-                  color: isPrimary
-                      ? Colors.white
-                      : const Color(0xFF2D2D2F),
+                  color: isPrimary ? Colors.white : const Color(0xFF2D2D2F),
                   letterSpacing: 0.5,
                 ),
               ),

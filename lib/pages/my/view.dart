@@ -11,7 +11,7 @@ import 'widgets/stats_card.dart';
 import 'widgets/version_info.dart';
 
 class MyPage extends StatefulWidget {
-  const MyPage({Key? key}) : super(key: key);
+  const MyPage({super.key});
 
   @override
   State<MyPage> createState() => _MyPageState();
@@ -30,7 +30,7 @@ class _MyPageState extends State<MyPage>
 }
 
 class _MyViewGetX extends GetView<MyController> {
-  const _MyViewGetX({Key? key}) : super(key: key);
+  const _MyViewGetX();
 
   // 主视图
   Widget _buildView() {

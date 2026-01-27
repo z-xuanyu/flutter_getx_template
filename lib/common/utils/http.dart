@@ -4,8 +4,10 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart' hide FormData;
 // import 'package:get/get.dart' hide FormData;
 
+import '../store/user.dart';
 import 'loading.dart';
 
 /*
@@ -28,66 +30,47 @@ class HttpUtil {
     // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
     BaseOptions options = BaseOptions(
       // 请求基地址,可以包含子路径
-      baseUrl: 'http://api.github.com',
+      baseUrl: 'http://localhost:3000/web',
 
       // baseUrl: storage.read(key: STORAGE_KEY_APIURL) ?? SERVICE_API_BASEURL,
       //连接服务器超时时间，单位是毫秒.
       connectTimeout: Duration(milliseconds: 5000),
-
-      // 响应流上前后两次接受到数据的间隔，单位为毫秒。
       receiveTimeout: Duration(milliseconds: 3000),
-
-      // Http请求头.
       headers: {},
-
-      /// 请求的Content-Type，默认值是"application/json; charset=utf-8".
-      /// 如果您想以"application/x-www-form-urlencoded"格式编码请求数据,
-      /// 可以设置此选项为 `Headers.formUrlEncodedContentType`,  这样[Dio]
-      /// 就会自动编码请求体.
       contentType: 'application/json; charset=utf-8',
-
-      /// [responseType] 表示期望以那种格式(方式)接受响应数据。
-      /// 目前 [ResponseType] 接受三种类型 `JSON`, `STREAM`, `PLAIN`.
-      ///
-      /// 默认值是 `JSON`, 当响应头中content-type为"application/json"时，dio 会自动将响应内容转化为json对象。
-      /// 如果想以二进制方式接受响应数据，如下载一个二进制文件，那么可以使用 `STREAM`.
-      ///
-      /// 如果想以文本(字符串)格式接收响应数据，请使用 `PLAIN`.
       responseType: ResponseType.json,
     );
-
     dio = Dio(options);
-
     // Cookie管理
     CookieJar cookieJar = CookieJar();
     dio.interceptors.add(CookieManager(cookieJar));
-
     // 添加拦截器
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          // Do something before request is sent
           return handler.next(options); //continue
-          // 如果你想完成请求并返回一些自定义数据，你可以resolve一个Response对象 `handler.resolve(response)`。
-          // 这样请求将会被终止，上层then会被调用，then中返回的数据将是你的自定义response.
-          //
-          // 如果你想终止请求并触发一个错误,你可以返回一个`DioError`对象,如`handler.reject(error)`，
-          // 这样请求将被中止并触发异常，上层catchError会被调用。
         },
         onResponse: (response, handler) {
-          // Do something with response data
+          final code = response.data?['code'];
+          if (code != 0) {
+            final message = response.data?['message'] ?? '请求错误';
+            EasyLoading.showError(message);
+            return handler.reject(
+              DioException(
+                requestOptions: response.requestOptions,
+                response: response,
+                type: DioExceptionType.badResponse,
+                error: message,
+              ),
+            );
+          }
           return handler.next(response); // continue
-          // 如果你想终止请求并触发一个错误,你可以 reject 一个`DioError`对象,如`handler.reject(error)`，
-          // 这样请求将被中止并触发异常，上层catchError会被调用。
         },
         onError: (DioException e, handler) {
-          // Do something with response error
           Loading.dismiss();
           ErrorEntity eInfo = createErrorEntity(e);
           onError(eInfo);
           return handler.next(e); //continue
-          // 如果你想完成请求并返回一些自定义数据，可以resolve 一个`Response`,如`handler.resolve(response)`。
-          // 这样请求将会被终止，上层then会被调用，then中返回的数据将是你的自定义response.
         },
       ),
     );
@@ -100,10 +83,14 @@ class HttpUtil {
   // 错误处理
   void onError(ErrorEntity eInfo) {
     switch (eInfo.code) {
+      case 400:
+        EasyLoading.showError(eInfo.message);
       case 401:
         // UserStore.to.onLogout();
         EasyLoading.showError(eInfo.message);
         break;
+      case -1:
+        EasyLoading.showError(eInfo.message);
       default:
         EasyLoading.showError('未知错误');
         break;
@@ -127,11 +114,11 @@ class HttpUtil {
             int errCode = error.response != null
                 ? error.response!.statusCode!
                 : -1;
-            // String errMsg = error.response.statusMessage;
-            // return ErrorEntity(code: errCode, message: errMsg);
+
+            final errMsg = error.response?.data?['message'];
             switch (errCode) {
               case 400:
-                return ErrorEntity(code: errCode, message: "请求语法错误");
+                return ErrorEntity(code: errCode, message: errMsg);
               case 401:
                 return ErrorEntity(code: errCode, message: "没有权限");
               case 403:
@@ -150,22 +137,17 @@ class HttpUtil {
                 return ErrorEntity(code: errCode, message: "不支持HTTP协议请求");
               default:
                 {
-                  // return ErrorEntity(code: errCode, message: "未知错误");
-                  return ErrorEntity(
-                    code: errCode,
-                    message: error.response != null
-                        ? error.response!.statusMessage!
-                        : "",
-                  );
+                  return ErrorEntity(code: errCode, message: '其他错误');
                 }
             }
           } on Exception catch (_) {
-            return ErrorEntity(code: -1, message: "未知错误");
+            final errMsg = error.response?.data?['message'];
+            return ErrorEntity(code: -1, message: errMsg);
           }
         }
       default:
         {
-          return ErrorEntity(code: -1, message: error.message ?? "");
+          return ErrorEntity(code: -1, message: error.message ?? '');
         }
     }
   }
@@ -183,9 +165,9 @@ class HttpUtil {
   /// 读取本地配置
   Map<String, dynamic>? getAuthorizationHeader() {
     var headers = <String, dynamic>{};
-    // if (Get.isRegistered<UserStore>() && UserStore.to.hasToken == true) {
-    //   headers['Authorization'] = 'Bearer ${UserStore.to.token}';
-    // }
+    if (Get.isRegistered<UserStore>() && UserStore.to.hasToken == true) {
+      headers['Authorization'] = 'Bearer ${UserStore.to.token}';
+    }
     return headers;
   }
 
@@ -226,7 +208,7 @@ class HttpUtil {
       options: options,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return response.data?['data'];
   }
 
   /// restful post 操作
@@ -249,7 +231,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return response.data?['data'];
   }
 
   /// restful put 操作
@@ -272,7 +254,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return response.data?['data'];
   }
 
   /// restful patch 操作
@@ -295,7 +277,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return response.data?['data'];
   }
 
   /// restful delete 操作
@@ -318,7 +300,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return response.data?['data'];
   }
 
   /// restful post form 表单提交操作
@@ -341,7 +323,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return response.data?['data'];
   }
 
   /// restful post Stream 流数据
@@ -368,7 +350,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return response.data?['data'];
   }
 }
 

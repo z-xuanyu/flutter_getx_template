@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           getPages: RoutePages.list,
           navigatorObservers: [RoutePages.observer],
           debugShowCheckedModeBanner: false,
+          builder: EasyLoading.init(),
           // translations: TranslationService(),
         );
       },

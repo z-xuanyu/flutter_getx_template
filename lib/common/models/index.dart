@@ -1,3 +1,2 @@
 library;
-
-export 'user.dart';
+export 'auth/index.dart';
