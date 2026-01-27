@@ -79,7 +79,7 @@ class SignInPage extends GetView<SignInController> {
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
             letterSpacing: 0.3,
           ),
         ),
@@ -91,11 +91,11 @@ class SignInPage extends GetView<SignInController> {
   Widget _buildLoginForm(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.98),
+        color: Colors.white.withValues(alpha: 0.98),
         borderRadius: BorderRadius.circular(16.w),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF0F3460).withOpacity(0.3),
+            color: const Color(0xFF0F3460).withValues(alpha: 0.3),
             blurRadius: 30.w,
             offset: Offset(0, 15.h),
           ),
@@ -203,7 +203,7 @@ class SignInPage extends GetView<SignInController> {
             color: const Color(0xFFF5F5F5),
             borderRadius: BorderRadius.circular(10.w),
             border: Border.all(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               width: 1.5,
             ),
           ),
@@ -219,13 +219,13 @@ class SignInPage extends GetView<SignInController> {
               hintText: hintText,
               hintStyle: TextStyle(
                 fontSize: 14.sp,
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withValues(alpha: 0.5),
               ),
               prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 12.w, right: 8.w),
                 child: Icon(
                   icon,
-                  color: Colors.grey.withOpacity(0.6),
+                  color: Colors.grey.withValues(alpha: 0.6),
                   size: 18.sp,
                 ),
               ),
@@ -262,7 +262,7 @@ class SignInPage extends GetView<SignInController> {
                   ? LinearGradient(
                       colors: [
                         AppColors.primaryElement,
-                        AppColors.primaryElement.withOpacity(0.8),
+                        AppColors.primaryElement.withValues(alpha: 0.8),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -274,7 +274,7 @@ class SignInPage extends GetView<SignInController> {
               borderRadius: BorderRadius.circular(10.w),
               border: !isPrimary
                   ? Border.all(
-                      color: Colors.grey.withOpacity(0.3),
+                      color: Colors.grey.withValues(alpha: 0.3),
                       width: 1.5,
                     )
                   : null,
@@ -307,7 +307,7 @@ class SignInPage extends GetView<SignInController> {
           "Don't have an account? ",
           style: TextStyle(
             fontSize: 12.sp,
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
           ),
         ),
         GestureDetector(

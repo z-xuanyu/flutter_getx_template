@@ -102,7 +102,7 @@ class SignUpPage extends GetView<SignUpController> {
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
             letterSpacing: 0.3,
           ),
         ),
@@ -114,11 +114,11 @@ class SignUpPage extends GetView<SignUpController> {
   Widget _buildSignUpForm() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.98),
+        color: Colors.white.withValues(alpha: 0.98),
         borderRadius: BorderRadius.circular(16.w),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF0F3460).withOpacity(0.3),
+            color: const Color(0xFF0F3460).withValues(alpha: 0.3),
             blurRadius: 30.w,
             offset: Offset(0, 15.h),
           ),
@@ -179,9 +179,7 @@ class SignUpPage extends GetView<SignUpController> {
           SizedBox(height: 20.h),
 
           /// 服务条款复选框
-          Obx(
-            () => _buildTermsCheckbox(),
-          ),
+          Obx(() => _buildTermsCheckbox()),
 
           SizedBox(height: 24.h),
 
@@ -221,7 +219,7 @@ class SignUpPage extends GetView<SignUpController> {
             color: const Color(0xFFF5F5F5),
             borderRadius: BorderRadius.circular(10.w),
             border: Border.all(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               width: 1.5,
             ),
           ),
@@ -236,13 +234,13 @@ class SignUpPage extends GetView<SignUpController> {
               hintText: hintText,
               hintStyle: TextStyle(
                 fontSize: 14.sp,
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withValues(alpha: 0.5),
               ),
               prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 12.w, right: 8.w),
                 child: Icon(
                   icon,
-                  color: Colors.grey.withOpacity(0.6),
+                  color: Colors.grey.withValues(alpha: 0.6),
                   size: 18.sp,
                 ),
               ),
@@ -288,7 +286,7 @@ class SignUpPage extends GetView<SignUpController> {
             color: const Color(0xFFF5F5F5),
             borderRadius: BorderRadius.circular(10.w),
             border: Border.all(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               width: 1.5,
             ),
           ),
@@ -303,13 +301,13 @@ class SignUpPage extends GetView<SignUpController> {
               hintText: hintText,
               hintStyle: TextStyle(
                 fontSize: 14.sp,
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withValues(alpha: 0.5),
               ),
               prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 12.w, right: 8.w),
                 child: Icon(
                   icon,
-                  color: Colors.grey.withOpacity(0.6),
+                  color: Colors.grey.withValues(alpha: 0.6),
                   size: 18.sp,
                 ),
               ),
@@ -320,7 +318,7 @@ class SignUpPage extends GetView<SignUpController> {
                   padding: EdgeInsets.only(right: 12.w),
                   child: Icon(
                     showPassword ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.grey.withOpacity(0.6),
+                    color: Colors.grey.withValues(alpha: 0.6),
                     size: 18.sp,
                   ),
                 ),
@@ -355,17 +353,13 @@ class SignUpPage extends GetView<SignUpController> {
               border: Border.all(
                 color: controller.agreeTerms.value
                     ? AppColors.primaryElement
-                    : Colors.grey.withOpacity(0.3),
+                    : Colors.grey.withValues(alpha: 0.3),
                 width: 1.5,
               ),
               borderRadius: BorderRadius.circular(4.w),
             ),
             child: controller.agreeTerms.value
-                ? Icon(
-                    Icons.check,
-                    color: Colors.white,
-                    size: 14.sp,
-                  )
+                ? Icon(Icons.check, color: Colors.white, size: 14.sp)
                 : null,
           ),
         ),
@@ -429,7 +423,7 @@ class SignUpPage extends GetView<SignUpController> {
               gradient: LinearGradient(
                 colors: [
                   AppColors.primaryElement,
-                  AppColors.primaryElement.withOpacity(0.8),
+                  AppColors.primaryElement.withValues(alpha: 0.8),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -437,7 +431,7 @@ class SignUpPage extends GetView<SignUpController> {
               borderRadius: BorderRadius.circular(10.w),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primaryElement.withOpacity(0.3),
+                  color: AppColors.primaryElement.withValues(alpha: 0.3),
                   blurRadius: 15.w,
                   offset: Offset(0, 5.h),
                 ),
@@ -469,7 +463,7 @@ class SignUpPage extends GetView<SignUpController> {
           "Already have an account? ",
           style: TextStyle(
             fontSize: 12.sp,
-            color: Colors.white.withOpacity(0.7),
+            color: Colors.white.withValues(alpha: 0.7),
           ),
         ),
         GestureDetector(

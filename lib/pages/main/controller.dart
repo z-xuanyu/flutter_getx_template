@@ -70,7 +70,7 @@ class MainController extends GetxController {
   void handleTap(int index) {
     Get.snackbar(
       "菜单项 ${index + 1}",
-      "${menuItems[index].title}",
+      menuItems[index].title,
     );
   }
 

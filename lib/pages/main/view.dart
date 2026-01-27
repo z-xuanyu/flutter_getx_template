@@ -80,13 +80,13 @@ class MainPage extends GetView<MainController> {
           end: Alignment.bottomRight,
           colors: [
             AppColors.primaryElement,
-            AppColors.primaryElement.withOpacity(0.8),
+            AppColors.primaryElement.withValues(alpha: 0.8),
           ],
         ),
         borderRadius: BorderRadius.circular(16.w),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryElement.withOpacity(0.2),
+            color: AppColors.primaryElement.withValues(alpha: 0.2),
             blurRadius: 20.w,
             offset: Offset(0, 10.h),
           ),
@@ -108,7 +108,7 @@ class MainPage extends GetView<MainController> {
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                       letterSpacing: 0.3,
                     ),
                   ),
@@ -130,7 +130,7 @@ class MainPage extends GetView<MainController> {
                 onTap: controller.handleLogout,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20.w),
                   ),
                   padding: EdgeInsets.symmetric(
@@ -179,7 +179,7 @@ class MainPage extends GetView<MainController> {
           Container(
             height: 8.h,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(4.w),
             ),
             child: ClipRRect(
@@ -188,7 +188,7 @@ class MainPage extends GetView<MainController> {
                 value: 0.65,
                 backgroundColor: Colors.transparent,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Colors.white.withOpacity(0.8),
+                  Colors.white.withValues(alpha: 0.8),
                 ),
               ),
             ),
@@ -199,7 +199,7 @@ class MainPage extends GetView<MainController> {
             style: TextStyle(
               fontSize: 11.sp,
               fontWeight: FontWeight.w400,
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -225,7 +225,7 @@ class MainPage extends GetView<MainController> {
               style: TextStyle(
                 fontSize: 11.sp,
                 fontWeight: FontWeight.w400,
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withValues(alpha: 0.7),
               ),
             ),
             value,
@@ -255,7 +255,7 @@ class MainPage extends GetView<MainController> {
                         borderRadius: BorderRadius.circular(14.w),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
+                            color: Colors.grey.withValues(alpha: 0.1),
                             blurRadius: 10.w,
                             offset: Offset(0, 4.h),
                           ),
@@ -317,7 +317,7 @@ class MainPage extends GetView<MainController> {
           borderRadius: BorderRadius.circular(14.w),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.grey.withValues(alpha: 0.1),
               blurRadius: 15.w,
               offset: Offset(0, 5.h),
             ),
@@ -337,7 +337,7 @@ class MainPage extends GetView<MainController> {
                     width: 52.w,
                     height: 52.w,
                     decoration: BoxDecoration(
-                      color: item.color.withOpacity(0.1),
+                      color: item.color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12.w),
                     ),
                     child: Icon(item.icon, color: item.color, size: 26.sp),
@@ -357,7 +357,7 @@ class MainPage extends GetView<MainController> {
                     style: TextStyle(
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
-                      color: Colors.grey.withOpacity(0.6),
+                      color: Colors.grey.withValues(alpha: 0.6),
                     ),
                   ),
                 ],
@@ -416,7 +416,7 @@ class MainPage extends GetView<MainController> {
                   borderRadius: BorderRadius.circular(12.w),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: Colors.grey.withValues(alpha: 0.1),
                       blurRadius: 12.w,
                       offset: Offset(0, 4.h),
                     ),
@@ -429,7 +429,7 @@ class MainPage extends GetView<MainController> {
                       height: 100.h,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: AppColors.primaryElement.withOpacity(0.1),
+                        color: AppColors.primaryElement.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(12.w),
                           topRight: Radius.circular(12.w),
@@ -438,7 +438,7 @@ class MainPage extends GetView<MainController> {
                       child: Icon(
                         Icons.image,
                         size: 40.sp,
-                        color: AppColors.primaryElement.withOpacity(0.3),
+                        color: AppColors.primaryElement.withValues(alpha: 0.3),
                       ),
                     ),
                     Expanded(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../common/widgets/app.dart';
 import '../about/view.dart';
 import '../main/view.dart';
 import 'index.dart';
@@ -10,23 +9,6 @@ class ApplicationPage extends GetView<ApplicationController> {
   const ApplicationPage({super.key});
 
   // 顶部导航
-  AppBar _buildAppBar() {
-    return transparentAppBar(
-      title: Obx(
-        () => Text(
-          controller.tabTitles[controller.state.tabIndex],
-          style: TextStyle(
-            fontFamily: 'Montserrat',
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      actions: [
-        IconButton(icon: Icon(Icons.search), onPressed: () => debugPrint('搜索')),
-      ],
-    );
-  }
 
   // 内容页面
   Widget _buildPageView() {
