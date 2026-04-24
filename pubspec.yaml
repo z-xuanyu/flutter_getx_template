@@ -44,6 +44,10 @@ dependencies:
   shared_preferences: ^2.5.3
   package_info_plus: ^9.0.0
   logger: ^2.6.2
+  # HTTP 请求
+  http: ^1.6.0
+  # 环境变量读取
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +70,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # 配置资源文件
+  assets:
+    - .env
 
   # To add assets to your application, add an assets section, like this:
   # assets:
