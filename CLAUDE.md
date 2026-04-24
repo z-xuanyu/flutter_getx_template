@@ -93,6 +93,7 @@ flutter pub upgrade
   - 统一错误处理，集成 EasyLoading 提示
   - 支持 RESTful API（GET/POST/PUT/PATCH/DELETE）
   - Cookie 管理支持
+  - 默认 baseUrl: `http://localhost:3000/web`
 - **UserAPI**: 用户相关 API 接口封装
   - 登录、获取用户信息、注销等接口
   - 返回实体类对象（如 `UserLoginResponseEntity`）
@@ -111,6 +112,24 @@ flutter pub upgrade
 - `state.dart`: 页面状态类（可选，使用 `Rx` 变量）
 - `bindings.dart`: 依赖绑定类（继承 `Bindings`）
 - `widgets/`: 页面专用组件目录
+
+### 主要页面
+
+#### 应用主页面 (ApplicationPage)
+- 底部导航栏结构，包含三个 Tab
+- Tab 1: 首页 (MainPage)
+- Tab 2: 关于 (AboutPage)
+- Tab 3: 我的 (MyPage)
+- 使用 `PageView` 管理页面切换
+- 使用 `AutomaticKeepAliveClientMixin` 保持页面状态
+
+#### 我的页面 (MyPage)
+- 个人资料头部展示
+- 统计数据卡片（订单、收藏、优惠券）
+- 功能菜单列表（设置、消息通知、帮助等）
+- 切换开关（通知开关、深色模式）
+- 退出登录按钮
+- 版本信息
 
 ### 目录结构说明
 
@@ -136,9 +155,10 @@ lib/
     ├── welcome/             # 欢迎页
     ├── sign_in/             # 登录页
     ├── sign_up/             # 注册页
-    ├── application/         # 主应用页
-    ├── main/                # 主页
-    └── about/               # 关于页
+    ├── application/         # 主应用页（底部导航）
+    ├── main/                # 首页
+    ├── about/               # 关于页
+    └── my/                  # 个人中心页
 ```
 
 ### 关键设计模式
@@ -182,14 +202,20 @@ lib/
 
 ### 环境配置
 
-- **Flutter SDK**: ^3.9.2
+- **Flutter SDK**: ^3.9.2（实际版本 3.38.9）
 - **Dart SDK**: ^3.9.2
+- **屏幕适配**: 375 x 812（设计稿尺寸）
 - **主要依赖**:
   - `get`: ^4.7.2 - GetX 状态管理、路由、依赖注入
   - `dio`: ^5.9.0 - HTTP 客户端
   - `flutter_screenutil`: ^5.9.3 - 屏幕适配
   - `flutter_easyloading`: ^3.0.5 - 加载提示
   - `shared_preferences`: ^2.5.3 - 本地存储
+  - `cookie_jar`: ^4.0.8 - Cookie 管理
+  - `dio_cookie_manager`: ^3.3.0 - Dio Cookie 管理器
+  - `package_info_plus`: ^9.0.0 - 应用包信息
+  - `logger`: ^2.6.2 - 日志工具
+  - `crypto`: ^3.0.6 - 加密库
 
 ### 调试技巧
 
@@ -210,3 +236,4 @@ lib/
 3. **状态监控**:
    - 使用 `Obx(() => Text('${controller.value}'))` 观察状态变化
    - 在控制器的 `onInit` 和 `onClose` 中添加日志
+
