@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'common/index.dart';
 
 /// 全局静态数据
@@ -12,6 +13,9 @@ class Global {
 
     setSystemUi();
     Loading();
+
+    // 初始化 dotenv
+    await dotenv.load(fileName: ".env");
 
     await Get.putAsync<StorageService>(() => StorageService().init());
 
