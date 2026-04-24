@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(dir c:\\\\Users\\\\96971\\\\Desktop\\\\flutter_getx_template)"
     ]
   }
 }
